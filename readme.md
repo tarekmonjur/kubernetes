@@ -400,5 +400,35 @@ Its connect the cluster with a cloud providers API so that can use cloud resourc
 ## Worker Node Component
 ### In highly available most kubernets cluster run with a minimum of three worker nodes and each worker node has three component.
 
+* **Kubelet**
+* **Container Runtime**
+* **Kube-Proxy**
+
+<br/>
+
+## Kubelet
+### An agent that runs on every worker node.
+
+* It make sure that containers in a pod are running and healthy.
+* Communicates directly with the api-server in the control plane.
+* It is looking for newly assinged pods.
+* It interacts with both container and node.
+
+<br/>
+
+## Container Runtime
+### Once the kubelet has been assigned a new pod, it starts the containers using the container runtime interface or CRI. CRI enables the kubelet to create containers with the engines.
+
+* ContainerD
+* CRI-O
+* kata Containers
+* AWS Firecracker
+
+<br/>
+
+## Kube-Proxy
+* **Makes sure pods and services can communicate with other pods and services on nodes and in the control plane.**
+* **Each kube-proxy communicates directly with the kube-apiserver**
+
 
 
