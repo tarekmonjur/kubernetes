@@ -9,7 +9,6 @@
 <br/>
 
 ## Container
-#
 A technology that bundles the code for an application and the configuration required to runt he code itself in out unit.
 
 * Portable.
@@ -29,13 +28,11 @@ A database that store container images like
 <br/>
 
 ## Image
-#
 A container image is a file with executable code that can be run as a continer.
 
 <br/>
 
 ## K8s Basic Components
-#
 
 * POD
 * Service
@@ -49,7 +46,7 @@ A container image is a file with executable code that can be run as a continer.
 <br/>
 
 ## POD
-#
+
 * **Smallest unit of kubernetes**
 * **POD contain containers**
 * **POD share storage, Network, resources and specification for running the containers**
@@ -213,7 +210,7 @@ spec:
 ```
 
 ***
-## **`Challenge:`** Create your own development
+## **Challenge:** Create your own development
 * ***Create a new development in a file called quote.yaml***
 * ***Name the deployment and name the app label quote-service***
 * ***Use the development namespace***
@@ -225,7 +222,7 @@ spec:
 * ***Use BusyBox to test that the application can accept traffic from inside the cluster***
 ****
 
-## **`Solution`**
+## **Solution**
 ```
 ---
 apiVersion: apps/v1
@@ -271,8 +268,8 @@ resources:
 * Service have permanent IP address.
 * Static IP address that connect with each pod.
 
-## `Service Example`
-#
+## Service Example
+
 ```
 ---
 apiVersion: v1
@@ -318,7 +315,6 @@ kubectl get services -n development
 <br/>
 
 ## **Control Plane**
-***
 
 ### If kubernetes like an airport then the control plane is like the air traffic control tower. So with it the people overlooking the cluster and making sure nodes and pods are created, modified, and delete without any issue.
 ![k8s control plane](/learning-kubernetes/Control-Plane.png?raw=true "kubernetes")
@@ -326,7 +322,6 @@ kubectl get services -n development
 <br/>
 
 ## **Control Plane Component**
-***
 
 * **API Server**
 * **ETCD**
@@ -337,7 +332,7 @@ kubectl get services -n development
 <br>
 
 ## API Server
-***
+
 Its cluster gateway that get any request from client for the cluster and its one entry point to the cluster.
 
 * Acts as a gatekeeper for authentication.
@@ -355,7 +350,7 @@ kubectl get pods -n kube-system
 ```
 
 ## ETCD
-***
+
 Etcd the cluster brain and it is an open-source, highly avaiable key value store. In a kubernetes cluster it saves all data about the state of the cluster.
 
 * Only the kube API server can communicate directly with etcd.
@@ -369,7 +364,7 @@ kubectl logs etcd-minikube -n kube-system
 <br/>
 
 ## Scheduler
-***
+
 Scheduler identifies newly created pods that have not been assinge a worker node and then chooses a node for the pod to run on it.
 
 * Schedule newly created pod.
@@ -379,7 +374,7 @@ Scheduler identifies newly created pods that have not been assinge a worker node
 <br/>
 
 ## Controller Manager
-***
+
 The controller manger is a loop that runs continually and check the status of the cluster to make sure things are running properly.
 
 * Check the all worker nodes are up and running.
@@ -391,7 +386,7 @@ The controller manger is a loop that runs continually and check the status of th
 <br/>
 
 ## Cloud controller manager
-***
+
 Its connect the cluster with a cloud providers API so that can use cloud resources from AWS, Digital Ocean, Azure or any public cloud.
 
 
