@@ -389,6 +389,16 @@ The controller manger is a loop that runs continually and check the status of th
 
 Its connect the cluster with a cloud providers API so that can use cloud resources from AWS, Digital Ocean, Azure or any public cloud.
 
+<br/>
+
+## **Worker Node**
+### The worker nodes are where pods are scheduled and run.
+### If kubernetes like an airport then the control plane is like the air traffic control tower. Then the worker nodes are like the busy terminals, where planes park and passengers board.
+
+![k8s worker nodes](/learning-kubernetes/Worker-nodes.png?raw=true)
+
+## Worker Node Component
+### In highly available most kubernets cluster run with a minimum of three worker nodes and each worker node has three component.
 
 
 
