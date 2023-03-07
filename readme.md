@@ -430,5 +430,32 @@ Its connect the cluster with a cloud providers API so that can use cloud resourc
 * **Makes sure pods and services can communicate with other pods and services on nodes and in the control plane.**
 * **Each kube-proxy communicates directly with the kube-apiserver**
 
+<br/>
 
+## How to work the control plane and nodes together
+![control plane and nodes time series diagram](/learning-kubernetes/k8s-timeseries-diagram.png)
+
+* A user run a kubernetes command for deployment. kubernetes config (kubeconfig) file gives permission to kubectl to communicate with the kubernetes cluster. kubectl command sends the information to the kube API server.
+
+* Kube API server save the new deployment spec in etcd.
+
+* While this is happening, the kube controller manager is checking the kube API server see if there have been any changes since its last loop.
+
+* The kube scheduler then checks the kube API server to see there are any new pods that have not been assigned a node
+
+* The kube API servel tell the scheduler that has not been placed on a specific node.
+
+* So the scheduler chooses a node for the pod and sends that information back to the kube API server.
+
+* The API server saves the state of the cluster in etcd.
+
+* kubelet checks the API server to see if there are any new pods that it has been assigned.
+
+* The kube API server sends the pod spec for the new pod to the kubelet.
+
+* Then kubelet pulls the image and creates the container using the container runtime.
+
+* The kubelet sends the pod status, healty or unhealthy back to the API server.
+
+* Then API server saves the state to etcd.
 
