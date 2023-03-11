@@ -459,3 +459,59 @@ Its connect the cluster with a cloud providers API so that can use cloud resourc
 
 * Then API server saves the state to etcd.
 
+
+<br>
+<br>
+
+# **Helm**
+### Helm is the package management system for the kubernetes. Helm installs charts into Kubernetes, creating a new release for each installation. And to find new charts, you can search Helm chart repositories.
+
+<br>
+
+## Install Helm Chart
+Let's install a helm chart called kube-state-metrics that help us to monitor kubernetes cluster.
+
+### First add Helm repo
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+```
+
+### Then update the Helm repo
+```
+helm repo update
+```
+
+### Show the Helm repo list
+```
+helm repo list
+```
+
+### Create a namespace for install the chart
+```
+kubectl create ns metrics
+```
+
+### Install the Helm chart
+```
+helm install kube-state-metrics bitnami/kube-state-metrics -n metrics
+```
+
+### See the metrics info
+```
+kubectl port-forward svc/kube-state-metrics -n metrics
+```
+
+### Show the Helm chart
+```
+helm show chart bitnami/kube-state-metrics
+```
+
+### Show the Helm chart values
+```
+helm show values bitnami/kube-state-metrics
+OR
+helm show values bitnami/kube-state-metrics > values.yaml
+```
+
+
+
