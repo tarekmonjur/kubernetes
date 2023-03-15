@@ -498,7 +498,7 @@ helm install kube-state-metrics bitnami/kube-state-metrics -n metrics
 
 ### See the metrics info
 ```
-kubectl port-forward svc/kube-state-metrics -n metrics
+kubectl port-forward svc/kube-state-metrics 8080:8080 -n metrics
 ```
 
 ### Show the Helm chart
@@ -513,5 +513,113 @@ OR
 helm show values bitnami/kube-state-metrics > values.yaml
 ```
 
+### Show Helm release or list
+```
+helm list -n metrics
+OR
+helm ls -n metrics
+```
 
+### Helm upgrade chart version
+```
+helm upgrade kube-state-metrics bitnami/kube-state-metrics --version 3.3.3 -n metrics
+```
+
+### Helm delete release
+```
+helm delete kube-state-metrics -n metrics
+```
+
+<br>
+
+## **Challenge**: Install a Helm Chart
+* **Create a new namespace called metrics**
+* **Install the bitnami hosted metrics server helm chart**
+* **Ensure the release name is logs-metrics-server**
+* **Enable the metrics API with the flag --set apiService.create=true**
+
+<br>
+
+# Create Helm Chart
+Creat a own helm chart using command line like others.
+
+### First make a directory
+```
+mkdir helm-course
+cd helm-course/
+```
+
+### Create a Chart
+```
+helm create first-chart
+ls first-chart/
+```
+
+### Create configmap for helm chart
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: first-chart-configmap
+data:
+  port: "8080"
+```
+
+### Insatll Helm Chart
+```
+helm install first-chart .
+```
+
+### Get configmap
+```
+kubectl get cm
+```
+
+### Describe configmap
+```
+kubectl describe cm first-chart-configmap
+```
+
+### See Helm changes on localy
+```
+helm template first-chart .
+```
+
+### Upgrade Helm chart
+```
+helm upgrade first-chart .
+```
+
+### Create secret for helm chart
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: first-secret
+type: Opaque
+data:
+  username: YWRtaW4=
+  password: c2VjcmV0
+```
+
+### Get kubernetes secrets
+```
+kubectl get secrets
+```
+
+### Describe kubernetes secrets
+```
+kubectl describe secret first-secret
+```
+
+## Helm Rollback
+### Get Helm history/releases
+```
+helm history first-chart
+```
+
+### Rollback Helm Chart
+```
+helm rollback first-chart
+```
 
