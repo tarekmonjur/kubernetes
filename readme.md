@@ -658,10 +658,22 @@ helm test adc
 ```
 (Only works after deployment and if you have test hooks in your chart.)
 
+#### Decrypt the SOPS file
+```
+sops -d helmvars/dev/secrets.yaml > helmvars/dev/secrets.dec.yaml
+```
+
 #### Deploy Your Chart to Minikube
 ```
-helm upgrade --install my_app ./charts/my_service -f helmvars/dev/values.yaml \
--f helmvars/dev/sercret.yaml
+helm upgrade --install my_app ./charts/my_service \
+ -f helmvars/dev/values.yaml \
+-f helmvars/dev/sercret.dec.yaml
+```
+
+```
+helm upgrade --install my-release ./charts/my_service \
+  -f helmvars/dev/values.yaml \
+  -f <(sops -d helmvars/dev/secrets.yaml)
 ```
 my_app is the release name (you can choose any name).
 Adjust the values file as needed for your environment.
