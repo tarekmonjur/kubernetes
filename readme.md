@@ -623,3 +623,64 @@ helm history first-chart
 helm rollback first-chart
 ```
 
+
+### Here’s a step-by-step guide to verify, test, and deploy your Helm charts on Minikube:
+
+### Start Minikube
+```
+minikube start
+```
+#### Set Your Kubernetes Context to Minikube
+```
+kubectl config use-context minikube
+```
+#### Lint (Verify) Your Helm Chart
+```
+helm lint ./charts/my_service
+```
+This checks your chart for common errors.
+
+#### Test Rendering with Your Values
+```
+helm template adc ./charts/my_service -f helmvars/dev/values.yaml
+```
+This shows what will be deployed, using your values.
+
+### Run Helm Chart Tests (if you have test hooks defined)
+```
+helm test adc
+```
+(Only works after deployment and if you have test hooks in your chart.)
+
+#### Deploy Your Chart to Minikube
+```
+helm upgrade --install my_app ./charts/my_service -f helmvars/dev/values.yaml \
+-f helmvars/dev/sercret.yaml
+```
+my_app is the release name (you can choose any name).
+Adjust the values file as needed for your environment.
+#### Check Deployment Status
+```
+kubectl get pods
+kubectl get svc
+helm list
+```
+#### (Optional) Access Your App
+If your app exposes a service, you can access it via Minikube:
+```
+minikube service <service-name>
+```
+
+#### (Optional) Clean Up
+```
+helm uninstall adc
+minikube delete
+```
+
+####Summary:
+
+Use `helm lint` to verify.
+Use `helm template` to test rendering.
+Use `helm upgrade --install` to deploy.
+Use `kubectl` and `minikube` service to check and access your app.
+
