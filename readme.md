@@ -612,6 +612,12 @@ kubectl get secrets
 kubectl describe secret first-secret
 ```
 
+### Show Secrets
+```
+kubectl get secret <secret-name> -o yaml
+kubectl get secret <secret-name> -o jsonpath="{.data.DB_PASSWORD}" | base64 --decode
+```
+
 ## Helm Rollback
 ### Get Helm history/releases
 ```
