@@ -702,3 +702,14 @@ Use `helm template` to test rendering.
 Use `helm upgrade --install` to deploy.
 Use `kubectl` and `minikube` service to check and access your app.
 
+#### Tell your shell to use Minikube’s Docker daemon
+This makes Docker build directly inside Minikube’s internal Docker engine, so the image becomes available to Kubernetes without pushing it to a registry.
+```
+eval $(minikube docker-env)
+```
+
+#### Reset back to normal Docker after
+```
+eval $(minikube docker-env --unset)
+```
+
